@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Usuario</title>
+</head>
+<body>
+
+<h2>Inicio de Sesión</h2>
+
+<!-- Formulario para ingresar usuario y contraseña -->
+<form id="loginForm" onsubmit="return false;">
+    <label for="username">Usuario:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="password">Contraseña:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+    <button onclick="login()">Iniciar Sesión</button>
+</form>
+
+<hr>
+
+<!-- Formulario para cambiar la contraseña -->
+<h2>Cambiar Contraseña</h2>
+<form id="changePasswordForm" onsubmit="return false;">
+    <label for="newPassword">Nueva Contraseña:</label><br>
+    <input type="password" id="newPassword" name="newPassword" required><br><br>
+    <button onclick="changePassword()">Cambiar Contraseña</button>
+</form>
+
+<script>
+    // Datos de ejemplo (esto debería ser manejado en el servidor)
+    var storedUsername = "Usuario";
+    var storedPassword = "contraseña123";
+
+    // Función para iniciar sesión
+    function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        if (username === storedUsername && password === storedPassword) {
+            alert("Inicio de sesión exitoso.");
+            document.getElementById('password').value = ''; // Limpiar la contraseña
+        } else {
+            alert("Usuario o contraseña incorrectos.");
+        }
+    }
+
+    // Función para cambiar la contraseña
+    function changePassword() {
+        var newPassword = document.getElementById('newPassword').value;
+
+        // Aquí iría la lógica para cambiar la contraseña en el servidor
+        storedPassword = newPassword;
+        alert("Contraseña cambiada correctamente.");
+        document.getElementById('newPassword').value = ''; // Limpiar el campo de nueva contraseña
+    }
+</script>
+
+</body>
+</html>
