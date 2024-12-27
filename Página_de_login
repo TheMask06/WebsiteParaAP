@@ -33,27 +33,55 @@
     var storedUsername = "Usuario";
     var storedPassword = "contraseña123";
 
+    // Lista para almacenar las conversaciones
+    var conversaciones = [];
+
+    // Función para agregar mensajes a la conversación
+    function agregarMensaje(usuario, mensaje) {
+        conversaciones.push(usuario + ": " + mensaje);
+    }
+
     // Función para iniciar sesión
     function login() {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
 
+        agregarMensaje("Usuario", "Intento de inicio de sesión con usuario: " + username);
+
         if (username === storedUsername && password === storedPassword) {
             alert("Inicio de sesión exitoso.");
             document.getElementById('password').value = ''; // Limpiar la contraseña
+            agregarMensaje("Bot", "Inicio de sesión exitoso.");
         } else {
             alert("Usuario o contraseña incorrectos.");
+            agregarMensaje("Bot", "Inicio de sesión fallido.");
         }
+
+        guardarConversaciones();
     }
 
     // Función para cambiar la contraseña
     function changePassword() {
         var newPassword = document.getElementById('newPassword').value;
 
+        agregarMensaje("Usuario", "Cambio de contraseña.");
+
         // Aquí iría la lógica para cambiar la contraseña en el servidor
         storedPassword = newPassword;
         alert("Contraseña cambiada correctamente.");
         document.getElementById('newPassword').value = ''; // Limpiar el campo de nueva contraseña
+        agregarMensaje("Bot", "Contraseña cambiada correctamente.");
+
+        guardarConversaciones();
+    }
+
+    // Función para guardar las conversaciones en un archivo de texto
+    function guardarConversaciones() {
+        var blob = new Blob(conversaciones, { type: 'text/plain' });
+        var anchor = document.createElement('a');
+        anchor.download = 'conversaciones.txt';
+        anchor.href = window.URL.createObjectURL(blob);
+        anchor.click();
     }
 </script>
 
